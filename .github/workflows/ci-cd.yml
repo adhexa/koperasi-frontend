@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Verify & Finalize Live Traffic Routing
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "curl -sI http://localhost:80 | head -n 5 && docker compose -f ~/koperasi-merah-putih-frontend/docker-compose.yml ps"
+          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "curl -sI http://localhost:80 && cd ~/koperasi-merah-putih-frontend && docker compose ps"
 
   auto-rollback:
     name: 4b. Automatic Rollback (On Failure)
