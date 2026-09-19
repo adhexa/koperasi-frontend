@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "dbe194f2-c521-4d69-9784-dd7d332edf91",
+		"name": "Koperasi Merah Putih",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17402936",
+		"_collection_link": "https://www.postman.com/cloudy-spaceship-875599/kemendagri/collection/55wec0r/koperasi-merah-putih?action=share&source=collection_link&creator=17402936"
+	},
+	"item": [
+		{
+			"name": "API Getway",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"jimy\",\n  \"password\": \"Password123!\",\n  \"recaptcha_token\": \"03AFcWeA5QsUbbcXCHfda_iWwVIPydzDQTa4c9VLWKxGKCgmHUuwWhRNiZ9UEl8FrEyVO7TrpRIX7milLp04IKNMZlha9nvnOdjZMQ3OWKEd0xU7Xrssyt4mRLEY0vNm-Jd7xH_2nCsfwtnSurh2vy0Q7YSlepJCHNQsrB0wrjrjxTJmsvCGwj6EiSnYBVZXz3NjiWacvV2809uq0EZzsimO2nyggn4hVc37JVvf4oJZNTwr9lIoQuois-VXba4utWrlU_vtikzI3d1jvb822sWNA71Fmz5_yYqpn2YL96J5PFz3yApfWUQvSuiULR4umFSEHGwvVs8GxQ5cHW4aQHua-AzHeDvGMo8aopyFTBTcqwYw1TJPn4d7WJE-QjB21tyu0yg6J-o3Yshz6zIBJOC_lMLVW8Gj5qiMUuVxn9l6x0x8AhQ7mrTiI76nsnyZ_fmJAS-OexzPEdXqSZeHayYSbL5ydfl_H30rnNi3jaq7GJWm1YidI0XBJmQsEX_1xD9bBFHSz5UHd5p3QfVXmxuJNXeA5h5dbRv3OdrycGcB3P4UrqK4LG9AiGF0FOi5HXMSr4U9Ptp8DpPz7W34MmcSBuLfSl5J3l8xWdaHcRpg3-Wot2_65rObo9Cr3yJHtVCyT232T50yRadb7Wzcjm73D8UdE-KXaXcnlRwo_0MRE12FN-vQwR59qaebDB_2014RY220WtJ1LCKX_JQArZRSTvP00WZS8yC_6nCJ7MGHeNCTt5z0bpxqgMr1TzVsmXpG6HuHfrj2IH5Vugm0l0KWfgp_1hwdEAtGV2PC2FD_WsY4FY6GXJmfzIxDI-UGhpR6b3GhjJy25j53Ob8EQmaG7vYRlvpdq6u4dt3hkGOsoTuCTwXA6uhb9WSxO3HFPtEmWZnJ7wRkBK3hpj_V2TrwdgBy0A7D0gVAydNXIPyhUKHcEJ-GOEeldCin79i02lbCPcuCx0flmVQ4QEzt9DCetAeOIG7clVAh_ICkfDr5CaIATUMs7joIiOIS6yZu7suR4R8ngZMbfXvS5XD3huJvZHLCO_msOl71vBbgmRjPQh-OHstnNS30xA6u9MZJxmx_loT0uME6CVyswWl_9jkTWjVCRa06jDxUhM9dJ_pLwZLtrLQPtxze8BXyEd1FV0Qi9KmZEmsN8JYdgvdivnbKejWPAqlPf8VeElEymqDy7azjqVsts1GdWAlv9yo-E0bja5PpBRBdSghmanBD68hBgvaQWSQvX52PqVR98mVmxorhhbM6VrOZZveM6Fx-RQUA_dlv3vd7tVGRl-tnN-ZlDW7emP9LstDz2YsovHjQaeW3y4Ge5Q2zGSh0rw-lCAUZElJ1hy5z3hV6PvWuX8tiJigUEVLZAVNMpz768EHGSv44CQTEmUtriPUFKXirh9fTjS5WHjMiTTUc0Idbe11v7MKCrYHb1RBECU2zlGgsmlFVO2Ird0r-lr3aQLj0AoC_-BhbKY-T0CELfZ7ra89Q-4uygoEKYmU4sMlrVzKzGgTASIDB01MW8hH5-47e2MdJqhXcevvm-tShRqHd7_YfnD8gMTtWNnnbiuYMKiYlb1P8K6LMXITHa51Gmwt_z-HZDuLywl9eJtuLvkcJjj3VWWNKZjvJ3WX2q_s6mwwMREUP0xg9PD7ju8RuLbe0CCWGqAEhkXawdpDBmQ8Jm780C6HKfLT5F5URVskZj4303Cz8miZ96UB9Wu_-jNDlTZuzpwsLgsLtC7eWkFqqcHrhj63SuU9__Jecgmi88NqieAB2SF8bT9s6ghKxWVYc2mrVKyHTLMzTztyLh9XP0S8N7-URJim70NXLorHBSARDab0e5SyXlSxHpiDxg1UQhPAzFqwH_Ay58miKKn4895Ov8wTpsWL6-v-_7_F3bGEBL6xddWO2mwAEhmvE37pO-pCiTam6Nm7BhQtjYCYF_n08B_N5-dcxOeXnF4mUgdPXNGSkYd_uUIvKgk87hkBgAdxOhogUk0N_yNkIRSL8YV-u6NAmSgPXaYli29XBZP3Q2xzo5nWceUC36plFdjmocK6LtygeAGMuJh0_FLPWDUOeyUOjNL5C2Y1w\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/login",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "decoded token",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-token",
+										"value": "v2.local.5Eb76GZP6ejdXsXh4LcmL5maTu55Gsw27EALIsLOlAoYZWHly2ijGHw9e5Cohxgo4DREkl9d-NhturvgHHh8Vc8nk7eR9MrtpiabI4riEH4FvybpzFuuLHvcMOsNGk5LIIodNk5hs_xaqFyCd1N3Id8ur2kpOzeMyzMFYThVwMC_ZzXOVq_1EOpc-xAFgQUj6TE7hTjVdmRvuJ-MpKhThbZ6UenC4_FwZ2JePWwdfpbjpSj-yFJw9Z-7ZZOBb0LxbyT1PMh_4e-jj7Y1t0LRXHQzXXEHNlM6qtI5UwjEPH9LMS3p-KcLJmWVBYnanQ.bnVsbA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/detail-token",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"detail-token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://www.google.com/recaptcha/api/siteverify?secret=6LeK4VIrAAAAAFVDKSFV-hU8mNpRzMyOOi0KknwD&response=03AFcWeA5QsUbbcXCHfda_iWwVIPydzDQTa4c9VLWKxGKCgmHUuwWhRNiZ9UEl8FrEyVO7TrpRIX7milLp04IKNMZlha9nvnOdjZMQ3OWKEd0xU7Xrssyt4mRLEY0vNm-Jd7xH_2nCsfwtnSurh2vy0Q7YSlepJCHNQsrB0wrjrjxTJmsvCGwj6EiSnYBVZXz3NjiWacvV2809uq0EZzsimO2nyggn4hVc37JVvf4oJZNTwr9lIoQuois-VXba4utWrlU_vtikzI3d1jvb822sWNA71Fmz5_yYqpn2YL96J5PFz3yApfWUQvSuiULR4umFSEHGwvVs8GxQ5cHW4aQHua-AzHeDvGMo8aopyFTBTcqwYw1TJPn4d7WJE-QjB21tyu0yg6J-o3Yshz6zIBJOC_lMLVW8Gj5qiMUuVxn9l6x0x8AhQ7mrTiI76nsnyZ_fmJAS-OexzPEdXqSZeHayYSbL5ydfl_H30rnNi3jaq7GJWm1YidI0XBJmQsEX_1xD9bBFHSz5UHd5p3QfVXmxuJNXeA5h5dbRv3OdrycGcB3P4UrqK4LG9AiGF0FOi5HXMSr4U9Ptp8DpPz7W34MmcSBuLfSl5J3l8xWdaHcRpg3-Wot2_65rObo9Cr3yJHtVCyT232T50yRadb7Wzcjm73D8UdE-KXaXcnlRwo_0MRE12FN-vQwR59qaebDB_2014RY220WtJ1LCKX_JQArZRSTvP00WZS8yC_6nCJ7MGHeNCTt5z0bpxqgMr1TzVsmXpG6HuHfrj2IH5Vugm0l0KWfgp_1hwdEAtGV2PC2FD_WsY4FY6GXJmfzIxDI-UGhpR6b3GhjJy25j53Ob8EQmaG7vYRlvpdq6u4dt3hkGOsoTuCTwXA6uhb9WSxO3HFPtEmWZnJ7wRkBK3hpj_V2TrwdgBy0A7D0gVAydNXIPyhUKHcEJ-GOEeldCin79i02lbCPcuCx0flmVQ4QEzt9DCetAeOIG7clVAh_ICkfDr5CaIATUMs7joIiOIS6yZu7suR4R8ngZMbfXvS5XD3huJvZHLCO_msOl71vBbgmRjPQh-OHstnNS30xA6u9MZJxmx_loT0uME6CVyswWl_9jkTWjVCRa06jDxUhM9dJ_pLwZLtrLQPtxze8BXyEd1FV0Qi9KmZEmsN8JYdgvdivnbKejWPAqlPf8VeElEymqDy7azjqVsts1GdWAlv9yo-E0bja5PpBRBdSghmanBD68hBgvaQWSQvX52PqVR98mVmxorhhbM6VrOZZveM6Fx-RQUA_dlv3vd7tVGRl-tnN-ZlDW7emP9LstDz2YsovHjQaeW3y4Ge5Q2zGSh0rw-lCAUZElJ1hy5z3hV6PvWuX8tiJigUEVLZAVNMpz768EHGSv44CQTEmUtriPUFKXirh9fTjS5WHjMiTTUc0Idbe11v7MKCrYHb1RBECU2zlGgsmlFVO2Ird0r-lr3aQLj0AoC_-BhbKY-T0CELfZ7ra89Q-4uygoEKYmU4sMlrVzKzGgTASIDB01MW8hH5-47e2MdJqhXcevvm-tShRqHd7_YfnD8gMTtWNnnbiuYMKiYlb1P8K6LMXITHa51Gmwt_z-HZDuLywl9eJtuLvkcJjj3VWWNKZjvJ3WX2q_s6mwwMREUP0xg9PD7ju8RuLbe0CCWGqAEhkXawdpDBmQ8Jm780C6HKfLT5F5URVskZj4303Cz8miZ96UB9Wu_-jNDlTZuzpwsLgsLtC7eWkFqqcHrhj63SuU9__Jecgmi88NqieAB2SF8bT9s6ghKxWVYc2mrVKyHTLMzTztyLh9XP0S8N7-URJim70NXLorHBSARDab0e5SyXlSxHpiDxg1UQhPAzFqwH_Ay58miKKn4895Ov8wTpsWL6-v-_7_F3bGEBL6xddWO2mwAEhmvE37pO-pCiTam6Nm7BhQtjYCYF_n08B_N5-dcxOeXnF4mUgdPXNGSkYd_uUIvKgk87hkBgAdxOhogUk0N_yNkIRSL8YV-u6NAmSgPXaYli29XBZP3Q2xzo5nWceUC36plFdjmocK6LtygeAGMuJh0_FLPWDUOeyUOjNL5C2Y1w",
+									"protocol": "https",
+									"host": [
+										"www",
+										"google",
+										"com"
+									],
+									"path": [
+										"recaptcha",
+										"api",
+										"siteverify"
+									],
+									"query": [
+										{
+											"key": "secret",
+											"value": "6LeK4VIrAAAAAFVDKSFV-hU8mNpRzMyOOi0KknwD"
+										},
+										{
+											"key": "response",
+											"value": "03AFcWeA5QsUbbcXCHfda_iWwVIPydzDQTa4c9VLWKxGKCgmHUuwWhRNiZ9UEl8FrEyVO7TrpRIX7milLp04IKNMZlha9nvnOdjZMQ3OWKEd0xU7Xrssyt4mRLEY0vNm-Jd7xH_2nCsfwtnSurh2vy0Q7YSlepJCHNQsrB0wrjrjxTJmsvCGwj6EiSnYBVZXz3NjiWacvV2809uq0EZzsimO2nyggn4hVc37JVvf4oJZNTwr9lIoQuois-VXba4utWrlU_vtikzI3d1jvb822sWNA71Fmz5_yYqpn2YL96J5PFz3yApfWUQvSuiULR4umFSEHGwvVs8GxQ5cHW4aQHua-AzHeDvGMo8aopyFTBTcqwYw1TJPn4d7WJE-QjB21tyu0yg6J-o3Yshz6zIBJOC_lMLVW8Gj5qiMUuVxn9l6x0x8AhQ7mrTiI76nsnyZ_fmJAS-OexzPEdXqSZeHayYSbL5ydfl_H30rnNi3jaq7GJWm1YidI0XBJmQsEX_1xD9bBFHSz5UHd5p3QfVXmxuJNXeA5h5dbRv3OdrycGcB3P4UrqK4LG9AiGF0FOi5HXMSr4U9Ptp8DpPz7W34MmcSBuLfSl5J3l8xWdaHcRpg3-Wot2_65rObo9Cr3yJHtVCyT232T50yRadb7Wzcjm73D8UdE-KXaXcnlRwo_0MRE12FN-vQwR59qaebDB_2014RY220WtJ1LCKX_JQArZRSTvP00WZS8yC_6nCJ7MGHeNCTt5z0bpxqgMr1TzVsmXpG6HuHfrj2IH5Vugm0l0KWfgp_1hwdEAtGV2PC2FD_WsY4FY6GXJmfzIxDI-UGhpR6b3GhjJy25j53Ob8EQmaG7vYRlvpdq6u4dt3hkGOsoTuCTwXA6uhb9WSxO3HFPtEmWZnJ7wRkBK3hpj_V2TrwdgBy0A7D0gVAydNXIPyhUKHcEJ-GOEeldCin79i02lbCPcuCx0flmVQ4QEzt9DCetAeOIG7clVAh_ICkfDr5CaIATUMs7joIiOIS6yZu7suR4R8ngZMbfXvS5XD3huJvZHLCO_msOl71vBbgmRjPQh-OHstnNS30xA6u9MZJxmx_loT0uME6CVyswWl_9jkTWjVCRa06jDxUhM9dJ_pLwZLtrLQPtxze8BXyEd1FV0Qi9KmZEmsN8JYdgvdivnbKejWPAqlPf8VeElEymqDy7azjqVsts1GdWAlv9yo-E0bja5PpBRBdSghmanBD68hBgvaQWSQvX52PqVR98mVmxorhhbM6VrOZZveM6Fx-RQUA_dlv3vd7tVGRl-tnN-ZlDW7emP9LstDz2YsovHjQaeW3y4Ge5Q2zGSh0rw-lCAUZElJ1hy5z3hV6PvWuX8tiJigUEVLZAVNMpz768EHGSv44CQTEmUtriPUFKXirh9fTjS5WHjMiTTUc0Idbe11v7MKCrYHb1RBECU2zlGgsmlFVO2Ird0r-lr3aQLj0AoC_-BhbKY-T0CELfZ7ra89Q-4uygoEKYmU4sMlrVzKzGgTASIDB01MW8hH5-47e2MdJqhXcevvm-tShRqHd7_YfnD8gMTtWNnnbiuYMKiYlb1P8K6LMXITHa51Gmwt_z-HZDuLywl9eJtuLvkcJjj3VWWNKZjvJ3WX2q_s6mwwMREUP0xg9PD7ju8RuLbe0CCWGqAEhkXawdpDBmQ8Jm780C6HKfLT5F5URVskZj4303Cz8miZ96UB9Wu_-jNDlTZuzpwsLgsLtC7eWkFqqcHrhj63SuU9__Jecgmi88NqieAB2SF8bT9s6ghKxWVYc2mrVKyHTLMzTztyLh9XP0S8N7-URJim70NXLorHBSARDab0e5SyXlSxHpiDxg1UQhPAzFqwH_Ay58miKKn4895Ov8wTpsWL6-v-_7_F3bGEBL6xddWO2mwAEhmvE37pO-pCiTam6Nm7BhQtjYCYF_n08B_N5-dcxOeXnF4mUgdPXNGSkYd_uUIvKgk87hkBgAdxOhogUk0N_yNkIRSL8YV-u6NAmSgPXaYli29XBZP3Q2xzo5nWceUC36plFdjmocK6LtygeAGMuJh0_FLPWDUOeyUOjNL5C2Y1w"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transaction",
+					"item": [
+						{
+							"name": "create koperasi",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-token",
+										"value": "v2.local.tnUtwI5HlusM0V60DOhcD-Acy3tHUrqA5syCy6LpZ7pQ__V9BKXlnMpQhldQ2i_djvL1o54Qal9GasV2M56pjT7tMnf2j6o_fF_1vVwK4qWbeHTrQmsHiZCPVBlXcXY8Jo_Cr5-cYCWGNe3EP1hKXC2ErNAiHajSSpEjnlO0IJlQfugBaGsg9Hil1udJNjVQ-t5JarkGucc7KEj3q6QTklYba0zNKM0v5ZJ5aYQILOKP-lzTMkBajd3Z2K8dVVKcSK08T6Be7y_zMWZAIQbVdRu9qCzWeqxmEdE17lIGvmLf2aU2PCOhx2scLGIGiA.bnVsbA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"kode_desa\":\"11.18.06.2031\",\n        \"nama_koperasi\":\"testt\",\n        \"alamat\":\"jakarta\",\n        \"pic\":\"Jimy\",\n        \"tanggal_registrasi\":\"2025-06-01\",    //format yyyy-mm-dd\n        \"status_registrasi\":0      // sosialisasi = 0, terbentuk = 1, pembuatan akta = 2, berbadan hukum = 3\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/koperasi",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"koperasi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get koperasi provinsi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-token",
+										"value": "v2.local.YzzKcESk4E9x8HgvUkLLqtic7KwbHjFVfItkp2i2cWrOly_Ba7cOdfY7LANoWJRoWaLASv-uPlAyPfjba7TXT4Eg9eTdWZTdFMEUn6dZRgnI21cWUeEVo1L0Lb6tWZz3xvEUnLe61rPXddRgcojCmGqIvvYzEeFQSeJLRBeCoEu2_EJhe2dyKV3QxtgSUOfRDAGF7fHdr0KUVo3gI50pDBs5P7yWw2oOJ6qfqH0AjEyKdU3RJJPGWLW2fLNY9PrGDFUsCskAilRcdJpLFNF0taMi1gu4ettzktzRdpGXihkNniST5w826vxEWoc2cQ.bnVsbA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/koperasi",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"koperasi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get koperasi kabupaten",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-token",
+										"value": "v2.local.tNNDNv9vq1tbsG1RR7ngN3LIwpChyRcBvQ70dUCkTXb6aYe7APkU0VeBhsogKROj-xlBJ0K-MY3QxWjzUMEdxodguYcGI3JgAFTZgLSHwEOtbYln-EPWS5N3vA2ibNyqknlz71k19C3ore7CJgWFZEzUsdGxF4MS3C141us7ZpAgyyNpFUrDaTrglqrrsYZlgy5bdgKVgw3D1PFWRVQMWbl6VTrIB-sqAQCLTb1OyOCg1dCoakFnxrSJshLphVLfLY50K9Yhe-CJOytrpPpaDvQTxazvXrWzYAgYiK-__tAX1OxP5KZCoMDfoh-FwA.bnVsbA",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/koperasi/11?pages=2&limit=10&key_search=&sort=asc",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"koperasi",
+										"11"
+									],
+									"query": [
+										{
+											"key": "pages",
+											"value": "2"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "key_search",
+											"value": ""
+										},
+										{
+											"key": "sort",
+											"value": "asc",
+											"description": "default asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get koperasi desa",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-token",
+										"value": "v2.local.EMfZixLaCW3elf5npx7wK0Te4T73Ks0BnIYx9uwAaU0u-k6RWcoWm7FebOsmwNw7XLK9UHMo4CIGNSDa7sIXkJ9JtDtdFSJmgUJg01koMaIkVmWhLDU14CakQZa1UkDi2cVtsd93f86QRmlYxLmvuKSiVQyPYVh6w6gsWVL-PPIv72oJJeXIPCi3eretbdNZrmOboVktMACdxKiLxJ8szf3pbpAnOa5mk6yPd7IViWtSipwiWc8Zc0NPYmaCYB6gworGQDrwAq0kczqyOq_nmby1agpnZVtZfYQe8KWjAzZDaF7t-ekh6dG0V9acIQ.bnVsbA",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apigetwayservice}}/ndi/koperasi/11/11.17?pages=1&limit=100&key_search=&sort=asc",
+									"host": [
+										"{{apigetwayservice}}"
+									],
+									"path": [
+										"ndi",
+										"koperasi",
+										"11",
+										"11.17"
+									],
+									"query": [
+										{
+											"key": "pages",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "key_search",
+											"value": ""
+										},
+										{
+											"key": "sort",
+											"value": "asc",
+											"description": "default asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "trasaction service",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:bearer-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{urls}}/api/v1/koperasi?key_search&limit&paginate&provinsi_id&kabkot_id",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"koperasi"
+							],
+							"query": [
+								{
+									"key": "key_search",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": ""
+								},
+								{
+									"key": "paginate",
+									"value": ""
+								},
+								{
+									"key": "provinsi_id",
+									"value": ""
+								},
+								{
+									"key": "kabkot_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urls",
+			"value": "http://127.0.01:3001",
+			"type": "string"
+		},
+		{
+			"key": "apigetwayservice",
+			"value": "http://127.0.0.1:1000",
+			"type": "string"
+		}
+	]
+}

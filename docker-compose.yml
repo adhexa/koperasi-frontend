@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend-instance-1:
+    build: .
+    container_name: frontend-service-1
+    restart: always
+    ports:
+      - "80:80"
+
+  frontend-instance-2:
+    build: .
+    container_name: frontend-service-2
+    restart: always
+    ports:
+      - "8080:80"
