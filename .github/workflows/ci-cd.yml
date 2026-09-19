@@ -48,9 +48,9 @@ jobs:
     needs: deploy
     runs-on: self-hosted
     steps:
-      - name: Readiness Check Containers
+      - name: Real Readiness HTTP Probe Check
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo 'Checking container readiness...' && docker ps --filter status=running | grep frontend-service"
+          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "for i in {1..5}; do curl -f -s http://localhost:80 > /dev/null && echo 'HTTP 200 OK: Frontend Container Ready!' && exit 0 || sleep 3; done; echo 'Readiness Probe Failed!'; exit 1"
 
   traffic-cutover:
     name: 4a. Switch Traffic to New Pod
@@ -58,9 +58,9 @@ jobs:
     if: success()
     runs-on: self-hosted
     steps:
-      - name: Confirm Traffic Cutover
+      - name: Verify & Finalize Live Traffic Routing
         run: |
-          echo "Traffic successfully routed to new frontend instances."
+          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "curl -sI http://localhost:80 | head -n 5 && docker compose -f ~/koperasi-merah-putih-frontend/docker-compose.yml ps"
 
   auto-rollback:
     name: 4b. Automatic Rollback (On Failure)
@@ -68,17 +68,16 @@ jobs:
     if: failure()
     runs-on: self-hosted
     steps:
-      - name: Execute Automatic Rollback
+      - name: Execute Real Automatic Rollback
         run: |
-          echo "Health probe failed! Re-applying previous containers..."
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "cd ~/koperasi-merah-putih-frontend && docker compose up -d --force-recreate"
+          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo 'Initiating Rollback...' && cd ~/koperasi-merah-putih-frontend && docker compose up -d --force-recreate"
 
   observability-notify:
     name: 5. Observability & Log Notification
     needs: [traffic-cutover, auto-rollback]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - name: Report Observability Metrics
+      - name: Collect Container Metrics & Logs
         run: |
-          echo "Pipeline execution finished. Observability log & metrics transmitted."
+          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo '=== DOCKER STATS ===' && docker stats --no-stream && echo '=== CONTAINER LOGS ===' && docker logs --tail 20 frontend-service-1 || true"
