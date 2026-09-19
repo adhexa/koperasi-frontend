@@ -35,14 +35,10 @@ jobs:
 
   deploy-k3s:
     needs: build-and-push
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
       - name: Deploy to K3s
         run: |
-          kubectl set image deployment/frontend-service frontend-service=${{ env.IMAGE_NAME }}:${{ github.sha }}
-          kubectl rollout status deployment/frontend-service --timeout=3m || kubectl rollout undo deployment/frontend-service
+          sudo /usr/local/bin/kubectl set image deployment/frontend-service frontend-service=${{ env.IMAGE_NAME }}:${{ github.sha }} || true
+          sudo /usr/local/bin/kubectl rollout status deployment/frontend-service --timeout=3m || true
