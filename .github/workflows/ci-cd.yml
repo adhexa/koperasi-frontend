@@ -40,6 +40,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deploy to K3s via SSH
         run: |
-          ssh frontend "echo smkn1pst | sudo -S /usr/local/bin/kubectl apply -f -" < k3s-deployment.yaml
-          ssh frontend "echo smkn1pst | sudo -S /usr/local/bin/kubectl set image deployment/frontend-service frontend-service=${{ env.IMAGE_NAME }}:${{ github.sha }}"
-          ssh frontend "echo smkn1pst | sudo -S /usr/local/bin/kubectl rollout status deployment/frontend-service --timeout=3m"
+          cat k3s-deployment.yaml | ssh -p 2202 adha@127.0.0.1 "sudo /usr/local/bin/kubectl apply -f -"
+          ssh -p 2202 adha@127.0.0.1 "sudo /usr/local/bin/kubectl set image deployment/frontend-service frontend-service=${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          ssh -p 2202 adha@127.0.0.1 "sudo /usr/local/bin/kubectl rollout status deployment/frontend-service --timeout=3m"
