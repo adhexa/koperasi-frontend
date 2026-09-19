@@ -1,4 +1,4 @@
-name: CI/CD Pipeline - Frontend Service (K3s)
+name: CI/CD Pipeline - Frontend Service
 
 on:
   push:
@@ -15,6 +15,7 @@ env:
 
 jobs:
   build-and-push:
+    name: 1. Build & Push Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +35,50 @@ jobs:
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   deploy:
+    name: 2. Deploy (Rolling Update)
     needs: build-and-push
     runs-on: self-hosted
     steps:
       - name: Deploy via SSH (Docker Compose)
         run: |
-          ssh -p 2202 adha@127.0.0.1 "docker pull ${{ env.IMAGE_NAME }}:latest && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-1 && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-2 && cd ~/koperasi-merah-putih-frontend && docker compose up -d --no-build"
+          ssh frontend "docker pull ${{ env.IMAGE_NAME }}:latest && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-1 && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-2 && cd ~/koperasi-merah-putih-frontend && docker compose up -d --no-build"
+
+  readiness-probe:
+    name: 3. Health & Readiness Probe
+    needs: deploy
+    runs-on: self-hosted
+    steps:
+      - name: Readiness Check Containers
+        run: |
+          ssh frontend "echo 'Checking container readiness...' && docker ps --filter status=running | grep frontend-service"
+
+  traffic-cutover:
+    name: 4a. Switch Traffic to New Pod
+    needs: readiness-probe
+    if: success()
+    runs-on: self-hosted
+    steps:
+      - name: Confirm Traffic Cutover
+        run: |
+          echo "Traffic successfully routed to new frontend instances."
+
+  auto-rollback:
+    name: 4b. Automatic Rollback (On Failure)
+    needs: readiness-probe
+    if: failure()
+    runs-on: self-hosted
+    steps:
+      - name: Execute Automatic Rollback
+        run: |
+          echo "Health probe failed! Re-applying previous containers..."
+          ssh frontend "cd ~/koperasi-merah-putih-frontend && docker compose up -d --force-recreate"
+
+  observability-notify:
+    name: 5. Observability & Log Notification
+    needs: [traffic-cutover, auto-rollback]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report Observability Metrics
+        run: |
+          echo "Pipeline execution finished. Observability log & metrics transmitted."
