@@ -20,8 +20,8 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: frontend-service
-        image: frontend-service:latest
-        imagePullPolicy: IfNotPresent
+        image: ghcr.io/adhexa/koperasi-merah-putih-frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 ---
