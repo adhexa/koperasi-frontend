@@ -28,7 +28,7 @@ export const usersAPI = {
       const response = await api.get<UserListResponse>('/ndi/user/daftar-pengguna')
       if (response.data && Array.isArray(response.data.data)) {
         return response.data.data.map((u: BackendUser) => ({
-          id: String(u.id_user || u.uuid),
+          id: u.uuid,
           nip: u.nip_users || '-',
           username: u.username,
           nama: u.nama_user,
