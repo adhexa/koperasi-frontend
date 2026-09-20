@@ -13,7 +13,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { useProfilePassword } from "../hooks/useProfilePassword";
 
 export function ProfileUserPassword() {
-  const { form, onSubmit, isDisabled } = useProfilePassword();
+  const { form, onSubmit, isDisabled, isLoading, successMessage, errorMessage } =
+    useProfilePassword();
   const [isEditing, setIsEditing] = useState(false);
 
   const [showPassword, setShowPassword] = useState({
@@ -23,7 +24,7 @@ export function ProfileUserPassword() {
   });
 
   const toggleVisibility = (field: keyof typeof showPassword) => {
-    setShowPassword((prev) => ({
+    setShowPassword((prev: typeof showPassword) => ({
       ...prev,
       [field]: !prev[field],
     }));
@@ -58,6 +59,17 @@ export function ProfileUserPassword() {
 
   return (
     <div>
+      {successMessage && (
+        <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-md">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md">
+          {errorMessage}
+        </div>
+      )}
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -107,17 +119,18 @@ export function ProfileUserPassword() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="flex-1 h-10 border-gray-200 hover:bg-gray-50"
+                  className="flex-1 h-10 border-gray-200 hover:bg-gray-50 cursor-pointer"
                   onClick={handleCancel}
+                  disabled={isLoading}
                 >
                   Batal
                 </Button>
                 <Button
                   type="submit"
-                  disabled={isDisabled}
-                  className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300"
+                  disabled={isDisabled || isLoading}
+                  className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 cursor-pointer"
                 >
-                  Perbarui
+                  {isLoading ? "Menyimpan..." : "Perbarui"}
                 </Button>
               </div>
             ) : (
@@ -125,7 +138,7 @@ export function ProfileUserPassword() {
                 <Button
                   type="button"
                   onClick={handleStartEdit}
-                  className="h-10 bg-blue-600 hover:bg-blue-700"
+                  className="h-10 bg-blue-600 hover:bg-blue-700 cursor-pointer"
                 >
                   Ubah Password
                 </Button>

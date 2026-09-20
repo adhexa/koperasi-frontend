@@ -17,12 +17,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { UserPlus, Eye, EyeOff } from "lucide-react";
+import { UserPlus, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useAddUserForm } from "../hooks/useAddUserForm";
 
 export function AddUserForm() {
-  const { form, onSubmit, isDisabled } = useAddUserForm();
+  const [open, setOpen] = useState(false);
+  const { form, onSubmit, isDisabled, isLoading, errorMessage } = useAddUserForm(() => setOpen(false));
   const [showPassword, setShowPassword] = useState(false);
 
   const formFields = [
@@ -30,12 +31,12 @@ export function AddUserForm() {
     { name: "nama", label: "Nama", placeholder: "Masukkan nama lengkap" },
     { name: "username", label: "Username", placeholder: "Masukkan username" },
     { name: "jabatan", label: "Jabatan", placeholder: "Masukkan jabatan" },
-    { name: "pangkat", label: "Pangkat", placeholder: "Masukkan pangkat" },
-    { name: "golongan", label: "Golongan", placeholder: "Masukkan golongan" },
+    { name: "pangkat", label: "Pangkat (opsional)", placeholder: "Masukkan pangkat" },
+    { name: "golongan", label: "Golongan (opsional)", placeholder: "Masukkan golongan" },
   ];
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="gap-2 bg-blue-600 cursor-pointer hover:bg-blue-700 disabled:bg-gray-300">
           <UserPlus className="h-4 w-4" />
@@ -49,6 +50,12 @@ export function AddUserForm() {
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto pr-2">
+          {errorMessage && (
+            <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-600">
+              ⚠️ {errorMessage}
+            </div>
+          )}
+
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 gap-4">
@@ -115,6 +122,7 @@ export function AddUserForm() {
               <DialogFooter className="gap-2 pt-4 mt-2">
                 <DialogClose asChild>
                   <Button
+                    type="button"
                     variant="outline"
                     className="flex-1 h-10 border-gray-200 hover:bg-gray-50"
                   >
@@ -124,9 +132,10 @@ export function AddUserForm() {
                 <Button
                   type="submit"
                   disabled={isDisabled}
-                  className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300"
+                  className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 gap-2"
                 >
-                  Simpan
+                  {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {isLoading ? "Menyimpan..." : "Simpan"}
                 </Button>
               </DialogFooter>
             </form>

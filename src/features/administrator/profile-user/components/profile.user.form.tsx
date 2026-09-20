@@ -12,7 +12,8 @@ import { useProfileUserForm } from "../hooks/useProfileUserForm";
 import { useState } from "react";
 
 export function ProfileUserForm() {
-  const { form, onSubmit, isDisabled } = useProfileUserForm();
+  const { form, onSubmit, isDisabled, isLoading, successMessage, errorMessage } =
+    useProfileUserForm();
   const [isEditing, setIsEditing] = useState(false);
 
   const formFields = [
@@ -39,6 +40,17 @@ export function ProfileUserForm() {
 
   return (
     <div>
+      {successMessage && (
+        <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-md">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md">
+          {errorMessage}
+        </div>
+      )}
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -57,7 +69,7 @@ export function ProfileUserForm() {
                         {...field}
                         placeholder={fieldProps.placeholder}
                         className="h-10 border-gray-200 focus:border-gray-900 focus:ring-gray-900/10"
-                        disabled={!isEditing}
+                        disabled={!isEditing || fieldProps.name === "username" || fieldProps.name === "namaLevel"}
                       />
                     </FormControl>
                     <FormMessage />
@@ -75,15 +87,16 @@ export function ProfileUserForm() {
                   variant="outline"
                   className="flex-1 h-10 border-gray-200 hover:bg-gray-50 cursor-pointer"
                   onClick={handleCancel}
+                  disabled={isLoading}
                 >
                   Batal
                 </Button>
                 <Button
                   type="submit"
-                  disabled={isDisabled}
+                  disabled={isDisabled || isLoading}
                   className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 cursor-pointer"
                 >
-                  Perbarui
+                  {isLoading ? "Menyimpan..." : "Perbarui"}
                 </Button>
               </div>
             ) : (
