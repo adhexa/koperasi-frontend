@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, CheckCircle2, XCircle, Copy, Eye, Pencil, Loader2 } from "lucide-react";
+import { MoreHorizontal, CheckCircle2, XCircle, Copy, Eye, Pencil, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -35,6 +35,21 @@ function UserActions({ user }: { user: User }) {
     mutationFn: () => usersAPI.updateStatus(user.id, user.status !== "active"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users-list"] });
+    },
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: () => usersAPI.deleteUser(user.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users-list"] });
+      queryClient.invalidateQueries({ queryKey: ["raw-users-list"] });
+    },
+    onError: (err: any) => {
+      alert(
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          "Gagal menghapus user"
+      );
     },
   });
 
@@ -113,7 +128,7 @@ function UserActions({ user }: { user: User }) {
           >
             {user.status === "active" ? (
               <>
-                <XCircle className="h-4 w-4 text-red-500" />
+                <XCircle className="h-4 w-4 text-amber-500" />
                 <span>Set Nonaktif</span>
               </>
             ) : (
@@ -122,6 +137,17 @@ function UserActions({ user }: { user: User }) {
                 <span>Set Status Aktif</span>
               </>
             )}
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="cursor-pointer gap-2 text-red-600 focus:text-red-600 focus:bg-red-50"
+            onClick={() => {
+              if (confirm(`Apakah Anda yakin ingin menghapus user ${user.nama}?`)) {
+                deleteUserMutation.mutate();
+              }
+            }}
+          >
+            <Trash2 className="h-4 w-4 text-red-600" />
+            <span>Hapus User</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
