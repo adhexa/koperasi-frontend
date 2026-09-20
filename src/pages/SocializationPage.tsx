@@ -17,14 +17,12 @@ import { CalendarDays, Building2, CheckCircle, FileText, X, Upload } from 'lucid
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import uploadIcon from '../assets/icons/upload.png'
-import { koperasiAPI } from '../lib/api/koperasi'
-import type { KoperasiData } from '../lib/api/types'
 
 // Type definitions
 const formSchema = z.object({
-  kodeProvinsi: z.string().optional(),
-  kodeKobkot: z.string().optional(),
-  kodeKecamatan: z.string().optional(),
+  kodeProvinsi: z.string().min(1, "Kode provinsi wajib diisi."),
+  kodeKobkot: z.string().min(1, "Kode kabupaten/kota wajib diisi."),
+  kodeKecamatan: z.string().min(1, "Kode kecamatan wajib diisi."),
   kodeDesa: z.string().min(1, "Kode desa wajib diisi."),
   namaKoperasi: z.string().min(1, "Nama koperasi wajib diisi."),
   tanggalRegistrasi: z.string().min(1, "Tanggal registrasi wajib dipilih."),
@@ -169,28 +167,11 @@ export function SocializationPage() {
     form.setValue('status', newStatus, { shouldValidate: true })
   }
 
-  const onSubmit = async (values: FormData) => {
-    let statusRegistrasi = 0
-    if (values.status.sudahBerbadanHukum) statusRegistrasi = 3
-    else if (values.status.dalamProsesPembuatanAkta) statusRegistrasi = 2
-    else if (values.status.terbentuk) statusRegistrasi = 1
-    else if (values.status.sosialisasi) statusRegistrasi = 0
+  const onSubmit = (values: FormData) => {
+    const statusOrder: StatusKeys[] = ['sosialisasi', 'terbentuk', 'dalamProsesPembuatanAkta', 'sudahBerbadanHukum']
+    const highestStatus = statusOrder.reverse().find(key => values.status[key]) || ''
 
-    const payload: KoperasiData = {
-      kode_desa: values.kodeDesa || '75.01.01.2001',
-      nama_koperasi: values.namaKoperasi,
-      alamat: values.alamat,
-      pic: values.pic,
-      tanggal_registrasi: values.tanggalRegistrasi,
-      status_registrasi: statusRegistrasi
-    }
-
-    try {
-      await koperasiAPI.createKoperasi([payload])
-    } catch (err) {
-      console.warn('API call warning (handled for demo):', err)
-    }
-
+    console.log('Submitted:', { ...values, status: highestStatus })
     setShowSuccess(true)
     form.reset()
   }
@@ -313,9 +294,9 @@ export function SocializationPage() {
                         </div>
 
                         <div className="space-y-6">
-                          <LocationSelect name="kodeProvinsi" label="Provinsi" options={LOCATION_OPTIONS.provinsi} form={form} />
+                          {/* <LocationSelect name="kodeProvinsi" label="Provinsi" options={LOCATION_OPTIONS.provinsi} form={form} />
                           <LocationSelect name="kodeKobkot" label="Kabupaten/Kota" options={LOCATION_OPTIONS.kabkot} form={form} />
-                          <LocationSelect name="kodeKecamatan" label="Kecamatan" options={LOCATION_OPTIONS.kecamatan} form={form} />
+                          <LocationSelect name="kodeKecamatan" label="Kecamatan" options={LOCATION_OPTIONS.kecamatan} form={form} /> */}
                           <LocationSelect name="kodeDesa" label="Desa/Kelurahan" options={LOCATION_OPTIONS.desa} form={form} />
 
                           <FormField control={form.control} name="namaKoperasi" render={({ field }) => (
