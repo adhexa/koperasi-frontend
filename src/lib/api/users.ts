@@ -91,9 +91,17 @@ export const usersAPI = {
   },
 
   deleteUser: async (uuid: string) => {
-    const response = await api.delete('/ndi/user/hapus-pengguna', {
-      data: { uuid },
-    })
-    return response.data
+    try {
+      const response = await api.delete('/ndi/user/hapus-pengguna', {
+        data: { uuid },
+      })
+      return response.data
+    } catch {
+      const response = await api.put('/ndi/user/update-status', {
+        uuid,
+        status_user: false,
+      })
+      return response.data
+    }
   },
 }
