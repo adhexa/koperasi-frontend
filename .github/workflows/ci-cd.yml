@@ -83,7 +83,7 @@ jobs:
 
   observability-notify:
     name: 6. Observability
-    needs: [helm-upgrade]
+    needs: [traffic-cutover, auto-rollback]
     if: always()
     runs-on: self-hosted
     steps:
