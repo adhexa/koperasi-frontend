@@ -17,6 +17,14 @@ const formSchema = z.object({
 
 export type FormData = z.infer<typeof formSchema>;
 
+const parseNullString = (val: any, fallback: string = "-"): string => {
+  if (typeof val === "string") return val;
+  if (val && typeof val === "object" && "String" in val) {
+    return val.Valid && val.String ? val.String : fallback;
+  }
+  return fallback;
+};
+
 export function useProfileUserForm() {
   const queryClient = useQueryClient();
   const { user: authUser } = useAuthStore();
@@ -54,10 +62,10 @@ export function useProfileUserForm() {
         setUserUuid(currentUser.uuid);
         form.reset({
           username: currentUser.username,
-          pangkat: currentUser.pangkat || "Penata",
+          pangkat: parseNullString(currentUser.pangkat, "Penata"),
           jabatan: currentUser.jabatan_user || "Administrator",
           namaUser: currentUser.nama_user,
-          golongan: currentUser.golongan || "III/c",
+          golongan: parseNullString(currentUser.golongan, "III/c"),
           namaLevel: currentUser.nama_level || "Administrator",
         });
       }
@@ -79,7 +87,10 @@ export function useProfileUserForm() {
     },
     onError: (err: any) => {
       setErrorMessage(
-        err.response?.data?.message || "Gagal memperbarui profil di database"
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.response?.data?.msg ||
+          "Gagal memperbarui profil di database"
       );
       setSuccessMessage(null);
     },

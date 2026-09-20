@@ -53,7 +53,10 @@ function UserActions({ user }: { user: User }) {
     },
     onError: (err: any) => {
       setEditError(
-        err.response?.data?.message || "Gagal memperbarui data user"
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.response?.data?.msg ||
+          "Gagal memperbarui data user"
       );
     },
   });

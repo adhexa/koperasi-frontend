@@ -7,8 +7,8 @@ export interface BackendUser {
   username: string;
   nama_user: string;
   jabatan_user: string;
-  pangkat?: string;
-  golongan?: string;
+  pangkat?: any;
+  golongan?: any;
   nip_users: string;
   status_user: boolean;
   id_level: number;

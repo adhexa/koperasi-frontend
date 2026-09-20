@@ -72,7 +72,10 @@ export function useProfilePassword() {
     },
     onError: (err: any) => {
       setErrorMessage(
-        err.response?.data?.message || "Gagal memperbarui password"
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.response?.data?.msg ||
+          "Gagal memperbarui password"
       );
       setSuccessMessage(null);
     },

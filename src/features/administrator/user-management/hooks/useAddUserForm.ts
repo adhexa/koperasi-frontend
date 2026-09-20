@@ -57,7 +57,10 @@ export function useAddUserForm(onSuccess?: () => void) {
     },
     onError: (err: any) => {
       setErrorMessage(
-        err.response?.data?.message || "Gagal menambahkan user baru ke backend"
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.response?.data?.msg ||
+          "Gagal menambahkan user baru ke backend"
       );
     },
   });
