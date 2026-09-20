@@ -11,6 +11,7 @@ import { ConfirmationDialogProps } from "@/types/confirmation.dialog.types";
 export function ConfirmationDialog({
   isOpen,
   onClose,
+  onConfirm,
   title,
   description,
   btnText,
@@ -32,7 +33,17 @@ export function ConfirmationDialog({
             className="cursor-pointer"
             onClick={onClose}
           >
-            {btnText}
+            Batal
+          </Button>
+          <Button
+            variant="destructive"
+            className="cursor-pointer"
+            onClick={() => {
+              if (onConfirm) onConfirm();
+              if (onClose) onClose();
+            }}
+          >
+            {btnText || "Ya, Logout"}
           </Button>
         </div>
       </DialogContent>
