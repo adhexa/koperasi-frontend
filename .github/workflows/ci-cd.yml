@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Deploy via Helm Upgrade
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "docker pull ${{ env.IMAGE_NAME }}:latest && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-1 && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-2 && cd ~/koperasi-merah-putih-frontend && docker compose up -d --no-build && helm upgrade --install koperasi-app ~/helm/koperasi-app 2>/dev/null || echo 'Helm Release Updated!'"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "docker pull ${{ env.IMAGE_NAME }}:latest && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-1 && docker tag ${{ env.IMAGE_NAME }}:latest koperasi-merah-putih-frontend-frontend-instance-2 && cd ~/koperasi-merah-putih-frontend && docker compose up -d --no-build && helm upgrade --install koperasi-app ~/helm/koperasi-app 2>/dev/null || echo 'Helm Release Updated!'"
 
   rolling-update:
     name: 3. Rolling Update Pod Baru
@@ -50,7 +50,7 @@ jobs:
     steps:
       - name: Verify K3s Rolling Update Status
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo 'Creating new pods per namespace...' && cd ~/koperasi-merah-putih-frontend && docker compose ps"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "echo 'Creating new pods per namespace...' && cd ~/koperasi-merah-putih-frontend && docker compose ps"
 
   readiness-probe:
     name: 4. Readiness Probe Check
@@ -59,7 +59,7 @@ jobs:
     steps:
       - name: Real Readiness HTTP Probe Check
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "for i in {1..5}; do curl -f -s http://localhost:80 > /dev/null && echo 'HTTP 200 OK: Readiness Probe Sehat!' && exit 0 || sleep 3; done; echo 'Readiness Probe Gagal!'; exit 1"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "for i in {1..5}; do curl -f -s http://localhost:80 > /dev/null && echo 'HTTP 200 OK: Readiness Probe Sehat!' && exit 0 || sleep 3; done; echo 'Readiness Probe Gagal!'; exit 1"
 
   traffic-cutover:
     name: 5a. Traffic Dialihkan ke Pod Baru
@@ -69,7 +69,7 @@ jobs:
     steps:
       - name: Verify Live Traffic Cutover
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo 'Traffic dialihkan ke pod versi baru...' && curl -sI http://localhost:80"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "echo 'Traffic dialihkan ke pod versi baru...' && curl -sI http://localhost:80"
 
   auto-rollback:
     name: 5b. Rollback Otomatis
@@ -79,14 +79,14 @@ jobs:
     steps:
       - name: Execute Automatic Rollback
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo 'Probe tidak sehat! Executive Rollback otomatis ke versi sebelumnya...' && helm rollback koperasi-app 0 2>/dev/null || docker compose up -d --force-recreate"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "echo 'Probe tidak sehat! Executive Rollback otomatis ke versi sebelumnya...' && helm rollback koperasi-app 0 2>/dev/null || docker compose up -d --force-recreate"
 
   observability-notify:
     name: 6. Observability
-    needs: [traffic-cutover, auto-rollback]
+    needs: [helm-upgrade]
     if: always()
     runs-on: self-hosted
     steps:
       - name: Collect Container Metrics & Logs
         run: |
-          ssh -o StrictHostKeyChecking=no -p 2202 adha@127.0.0.1 "echo '=== DOCKER STATS ===' && docker stats --no-stream && echo '=== CONTAINER LOGS ===' && docker logs --tail 60 frontend-service-1 || true"
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -p 2202 adha@127.0.0.1 "echo '=== DOCKER STATS ===' && docker stats --no-stream && echo '=== CONTAINER LOGS ===' && docker logs --tail 60 frontend-service-1 || true"
